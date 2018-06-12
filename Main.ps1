@@ -12,7 +12,7 @@ $links = @(
     "https://cfhcable.dl.sourceforge.net/project/qbittorrent/qbittorrent-win32/qbittorrent-4.1.0/qbittorrent_4.1.0_x64_setup.exe"
     "https://www.7-zip.org/a/7z1805-x64.exe"
     "https://streamlabs.com/slobs/download"
-    "https://git-scm.com/download/win"
+    "https://github-production-release-asset-2e65be.s3.amazonaws.com/23216272/52993848-638c-11e8-87c7-4d75fc1d0b18?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20180612%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180612T223423Z&X-Amz-Expires=300&X-Amz-Signature=10e59c3f70c9438e6e1e30ef01e745e7c06eb9abb1b873e4b397bfc684b41862&X-Amz-SignedHeaders=host&actor_id=0&response-content-disposition=attachment%3B%20filename%3DGit-2.17.1.2-64-bit.exe&response-content-type=application%2Foctet-stream"
     "https://cmake.org/files/v3.11/cmake-3.11.2-win64-x64.msi"
     #"https://riotgamespatcher-a.akamaihd.net/releases/live/installer/deploy/League%20of%20Legends%20installer%20NA.exe"
     "http://videolan.mirrors.hivelocity.net/vlc/3.0.2/win64/vlc-3.0.2-win64.exe"
@@ -44,7 +44,7 @@ $paths = @(
     "$env:TEMP\nvidia.exe"
     "$env:TEMP\node.msi"
     "$env:TEMP\gyazo.exe"
-    "$env:TEMP\GoogleChrome.exe"
+    #"$env:TEMP\GoogleChrome.exe"
 )
 
 ################################################################################################
