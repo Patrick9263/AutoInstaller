@@ -59,6 +59,7 @@ foreach ($link in $links) {
     catch {
         Write-Host "Could not download $paths[$i]"
     }
+    $i = $i + 1
 }
 Write-Host "Finished downloading."
 
@@ -72,6 +73,7 @@ foreach ($path in $paths) {
     catch {
         Write-Host "Could not install $paths[$i]"
     }
+    $i = $i + 1
 }
 Write-Host "Installed the files."
 ################################### Delete the installers once they finish ###################################
@@ -86,6 +88,7 @@ foreach ($path in $paths) {
     catch {
         Write-Host "Could not remove $paths[$i]"
     }
+    $i = $i + 1
 }
 Write-Host "Installers deleted"
 
