@@ -64,35 +64,37 @@ function downloadFile ([string]$fileLink, [string]$filePath) {
     }
 }
 
+function installFile ([string]$fileLink, $indicator) {
+    try {
+        Start-Process -FilePath $path
+    }
+    catch {
+        Write-Host "Could not install" $paths[$indicator]
+    }
+}
+
 Write-Host "Downloading the files..."
 $i = 0
 foreach ($link in $links) {
-    Write-Host "Downloading #" $i...
+    Write-Host "Downloading #"$i...
     downloadFile $link $paths[$i]
     $i = $i + 1
 }
-Write-Host "Finished downloading."
 
 Write-Host "Installing the files..."
 $i = 0
 foreach ($path in $paths) {
-    try {
-        Write-Host "Installing #" $i...
-        Start-Process -FilePath $path -Wait
-    }
-    catch {
-        Write-Host "Could not install" $paths[$i]
-    }
+    installFile $path $i
     $i = $i + 1
 }
-Write-Host "Installed the files."
+Write-Host "Executed all installers."
+Pause
 ################################### Delete the installers once they finish ###################################
 
 Write-Host "Deleting installers..."
 $i = 0
 foreach ($path in $paths) {
     try {
-        Write-Host "Installing #" $i...
         Remove-Item -LiteralPath $path
     }
     catch {
@@ -100,7 +102,9 @@ foreach ($path in $paths) {
     }
     $i = $i + 1
 }
-Write-Host "Installers deleted"
+Write-Host "`r`nInstallers deleted"
+Pause
+Clear-Host
 
 #### Links: 
 # "https://riotgamespatcher-a.akamaihd.net/releases/live/installer/deploy/League%20of%20Legends%20installer%20NA.exe"
