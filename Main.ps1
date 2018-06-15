@@ -5,21 +5,19 @@ $links = @(
     "https://steamcdn-a.akamaihd.net/client/installer/SteamSetup.exe"
     "https://www.python.org/ftp/python/3.6.5/python-3.6.5.exe"
     "https://discordapp.com/api/download?platform=win"
-    "https://code.visualstudio.com/docs/?dv=win"
+    "https://go.microsoft.com/fwlink/?Linkid=852157"
     "https://updates.twitchapp.net/windows/installer/TwitchSetup.exe"
     "https://download.jetbrains.com/product?code=TBA&distribution=windows"
-    "https://dl.google.com/dl/android/studio/install/3.1.2.0/android-studio-ide-173.4720617-windows.exe"
-    "https://cygwin.com/setup-x86_64.exe"
-    "https://cfhcable.dl.sourceforge.net/project/qbittorrent/qbittorrent-win32/qbittorrent-4.1.0/qbittorrent_4.1.0_x64_setup.exe"
     "https://www.7-zip.org/a/7z1805-x64.exe"
     "https://streamlabs.com/slobs/download"
-    "https://github-production-release-asset-2e65be.s3.amazonaws.com/23216272/52993848-638c-11e8-87c7-4d75fc1d0b18?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20180612%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180612T223423Z&X-Amz-Expires=300&X-Amz-Signature=10e59c3f70c9438e6e1e30ef01e745e7c06eb9abb1b873e4b397bfc684b41862&X-Amz-SignedHeaders=host&actor_id=0&response-content-disposition=attachment%3B%20filename%3DGit-2.17.1.2-64-bit.exe&response-content-type=application%2Foctet-stream"
     "https://cmake.org/files/v3.11/cmake-3.11.2-win64-x64.msi"
     "http://videolan.mirrors.hivelocity.net/vlc/3.0.2/win64/vlc-3.0.2-win64.exe"
-    "https://notepad-plus-plus.org/repository/7.x/7.5.4/npp.7.5.4.Installer.x64.exe"
+    "https://notepad-plus-plus.org/repository/7.x/7.5.6/npp.7.5.6.Installer.x64.exe"
     "https://us.download.nvidia.com/GFE/GFEClient/3.13.1.30/GeForce_Experience_v3.13.1.30.exe"
     "https://nodejs.org/dist/v10.1.0/node-v10.1.0-x64.msi"
     "https://files.gyazo.com/setup/Gyazo-3.3.5.exe"
+    "https://cygwin.com/setup-x86_64.exe"
+    "https://dl.google.com/dl/android/studio/install/3.1.2.0/android-studio-ide-173.4720617-windows.exe"
     )
 ################################################################################################
 
@@ -33,32 +31,44 @@ $paths = @(
     "$env:TEMP\VSCode.exe"
     "$env:TEMP\twitch.exe"
     "$env:TEMP\toolbox.exe"
-    "$env:TEMP\androidStudio.exe"
-    "$env:TEMP\cygwin.exe"
-    "$env:TEMP\qbittorrent.exe"
     "$env:TEMP\7zip.exe"
     "$env:TEMP\streamLabs.exe"
-    "$env:TEMP\git.exe"
     "$env:TEMP\cmake.msi"
     "$env:TEMP\vlc.exe"
     "$env:TEMP\NPpp.exe"
     "$env:TEMP\nvidia.exe"
     "$env:TEMP\node.msi"
     "$env:TEMP\gyazo.exe"
+    "$env:TEMP\cygwin.exe"
+    "$env:TEMP\androidStudio.exe"
 )
 
 ################################################################################################
 
+function downloadFile ([string]$fileLink, [string]$filePath) {
+    $tries = 0
+    while ($tries -le 3) {
+        try {
+            Start-BitsTransfer -Source $fileLink -Destination $filePath -ErrorAction Stop
+        }
+        catch {
+            if ($tries -eq 3) {
+                Write-Host "Failed download"
+                Break
+            }
+            else {
+                Write-Host "Retrying download..."
+            }
+        }
+        $tries = $tries + 1
+    }
+}
+
 Write-Host "Downloading the files..."
 $i = 0
 foreach ($link in $links) {
-    try {
-        Write-Host "Downloading #$i..."
-        Start-BitsTransfer -Source $link $paths[$i]
-    }
-    catch {
-        Write-Host "Could not download $paths[$i]"
-    }
+    Write-Host "Downloading #" $i...
+    downloadFile $link $paths[$i]
     $i = $i + 1
 }
 Write-Host "Finished downloading."
@@ -67,11 +77,11 @@ Write-Host "Installing the files..."
 $i = 0
 foreach ($path in $paths) {
     try {
-        Write-Host "Installing #$i..."
+        Write-Host "Installing #" $i...
         Start-Process -FilePath $path -Wait
     }
     catch {
-        Write-Host "Could not install $paths[$i]"
+        Write-Host "Could not install" $paths[$i]
     }
     $i = $i + 1
 }
@@ -82,11 +92,11 @@ Write-Host "Deleting installers..."
 $i = 0
 foreach ($path in $paths) {
     try {
-        Write-Host "Installing #$i..."
+        Write-Host "Installing #" $i...
         Remove-Item -LiteralPath $path
     }
     catch {
-        Write-Host "Could not remove $paths[$i]"
+        Write-Host "Could not remove" $paths[$i]
     }
     $i = $i + 1
 }
