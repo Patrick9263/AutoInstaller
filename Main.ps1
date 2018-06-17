@@ -25,7 +25,7 @@ $links = @(
 ################################### paths for each installer ###################################
 $paths = @(
     "$env:TEMP\GoogleChrome.exe"
-    "$env:TEMP\steam.exe"
+    "$env:TEMP\steamInstaller.exe"
     "$env:TEMP\python.exe"
     "$env:TEMP\discord.exe"
     "$env:TEMP\VSCode.exe"
@@ -45,6 +45,7 @@ $paths = @(
 
 ################################################################################################
 
+$ProgressPreference = 'silentlyContinue'
 function downloadFile ([string]$fileLink, [string]$filePath) {
     $tries = 0
     while ($tries -le 3) {
