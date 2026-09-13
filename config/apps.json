@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "applications": {
+    "chrome": { "name": "Google Chrome", "id": "Google.Chrome", "source": "winget" },
+    "steam": { "name": "Steam", "id": "Valve.Steam", "source": "winget" },
+    "python": { "name": "Python 3", "id": "Python.Python.3.13", "source": "winget" },
+    "discord": { "name": "Discord", "id": "Discord.Discord", "source": "winget" },
+    "vscode": { "name": "Visual Studio Code", "id": "Microsoft.VisualStudioCode", "source": "winget" },
+    "jetbrains-toolbox": { "name": "JetBrains Toolbox", "id": "JetBrains.Toolbox", "source": "winget" },
+    "7zip": { "name": "7-Zip", "id": "7zip.7zip", "source": "winget" },
+    "streamlabs": { "name": "Streamlabs Desktop", "id": "Streamlabs.Streamlabs", "source": "winget" },
+    "cmake": { "name": "CMake", "id": "Kitware.CMake", "source": "winget" },
+    "vlc": { "name": "VLC media player", "id": "VideoLAN.VLC", "source": "winget" },
+    "notepad-plus-plus": { "name": "Notepad++", "id": "Notepad++.Notepad++", "source": "winget" },
+    "nodejs": { "name": "Node.js LTS", "id": "OpenJS.NodeJS.LTS", "source": "winget" },
+    "gyazo": { "name": "Gyazo", "id": "Nota.Gyazo", "source": "winget" },
+    "cygwin": { "name": "Cygwin", "id": "Cygwin.Cygwin", "source": "winget" },
+    "android-studio": { "name": "Android Studio", "id": "Google.AndroidStudio", "source": "winget" }
+  },
+  "bundles": {
+    "developer": ["python", "vscode", "jetbrains-toolbox", "cmake", "nodejs", "cygwin", "android-studio", "7zip"],
+    "gaming": ["steam", "discord"],
+    "general": ["chrome", "7zip", "vlc", "notepad-plus-plus", "gyazo"],
+    "streaming": ["streamlabs", "vlc", "discord"]
+  }
+}
